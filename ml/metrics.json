@@ -6,7 +6,6 @@
   "recall_approved": 1.0,
   "baseline_f1_macro": 0.417,
   "cv_default_forest": 0.758,
-  "cv_best": 0.766,
   "cv_by_model": {
     "LogisticRegression": 0.763,
     "RandomForestClassifier": 0.766

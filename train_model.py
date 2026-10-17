@@ -202,7 +202,6 @@ def main():
         "recall_approved": round(recall_score(y_test, y_pred, pos_label=1), 3),
         "baseline_f1_macro": round(baseline_f1, 3),
         "cv_default_forest": round(default_score, 3),
-        "cv_best": round(search.best_score_, 3),
         "cv_by_model": {name: round(score, 3) for name, score in best_by_model.items()},
         "best_params": {
             name.replace("classifier__", ""): str(value)
