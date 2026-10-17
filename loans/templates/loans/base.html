@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Оцінка займу{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'loans/style.css' %}">
+</head>
+<body class="{% block page_class %}{% endblock %}">
+    <header>
+        <nav>
+            <a href="{% url 'loans:form' %}">Нова заявка</a>
+            <a href="{% url 'loans:history' %}">Історія заявок</a>
+            <a href="{% url 'loans:about' %}">Про модель</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

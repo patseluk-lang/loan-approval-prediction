@@ -1,0 +1,62 @@
+{
+  "test_size": 77,
+  "accuracy": 0.857,
+  "f1_macro": 0.788,
+  "recall_rejected": 0.5,
+  "recall_approved": 1.0,
+  "baseline_f1_macro": 0.417,
+  "cv_default_forest": 0.758,
+  "cv_best": 0.766,
+  "cv_by_model": {
+    "LogisticRegression": 0.763,
+    "RandomForestClassifier": 0.766
+  },
+  "best_params": {
+    "class_weight": "None",
+    "max_depth": "None",
+    "min_samples_leaf": "5",
+    "n_estimators": "100"
+  },
+  "feature_importances": [
+    {
+      "feature": "Credit_History_0.0",
+      "importance": 0.331
+    },
+    {
+      "feature": "Credit_History_1.0",
+      "importance": 0.254
+    },
+    {
+      "feature": "ApplicantIncome",
+      "importance": 0.091
+    },
+    {
+      "feature": "CoapplicantIncome",
+      "importance": 0.075
+    },
+    {
+      "feature": "LoanAmount",
+      "importance": 0.075
+    },
+    {
+      "feature": "Property_Area_Rural",
+      "importance": 0.025
+    },
+    {
+      "feature": "Property_Area_Semiurban",
+      "importance": 0.023
+    },
+    {
+      "feature": "Loan_Amount_Term_360.0",
+      "importance": 0.015
+    },
+    {
+      "feature": "Married_Yes",
+      "importance": 0.013
+    },
+    {
+      "feature": "Dependents_0",
+      "importance": 0.011
+    }
+  ]
+}

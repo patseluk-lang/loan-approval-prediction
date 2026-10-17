@@ -1,0 +1,29 @@
+{% extends "loans/base.html" %}
+
+{% block title %}Заявка №{{ application.pk }}{% endblock %}
+
+{% block content %}
+<h1>Заявка №{{ application.pk }}</h1>
+
+<div class="decision {% if application.approved %}approved{% else %}rejected{% endif %}">
+    {% if application.approved %}Займ буде схвалено{% else %}У займі буде відмовлено{% endif %}
+    <span>Ймовірність схвалення: {% widthratio application.probability 1 100 %}%</span>
+</div>
+
+<table>
+    <tr><th>Стать</th><td>{{ application.get_gender_display }}</td></tr>
+    <tr><th>У шлюбі</th><td>{{ application.get_married_display }}</td></tr>
+    <tr><th>Кількість утриманців</th><td>{{ application.get_dependents_display }}</td></tr>
+    <tr><th>Освіта</th><td>{{ application.get_education_display }}</td></tr>
+    <tr><th>Самозайнятий</th><td>{{ application.get_self_employed_display }}</td></tr>
+    <tr><th>Дохід заявника</th><td>{{ application.applicant_income }}</td></tr>
+    <tr><th>Дохід співзаявника</th><td>{{ application.coapplicant_income }}</td></tr>
+    <tr><th>Сума займу</th><td>{{ application.loan_amount }}</td></tr>
+    <tr><th>Строк займу</th><td>{{ application.get_loan_amount_term_display }}</td></tr>
+    <tr><th>Кредитна історія</th><td>{{ application.get_credit_history_display }}</td></tr>
+    <tr><th>Район нерухомості</th><td>{{ application.get_property_area_display }}</td></tr>
+    <tr><th>Дата заявки</th><td>{{ application.created_at|date:"d.m.Y H:i" }}</td></tr>
+</table>
+
+<p><a href="{% url 'loans:form' %}">Подати ще одну заявку</a></p>
+{% endblock %}

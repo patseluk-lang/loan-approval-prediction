@@ -1,0 +1,49 @@
+{% extends "loans/base.html" %}
+
+{% block title %}Історія заявок{% endblock %}
+
+{% block page_class %}wide{% endblock %}
+
+{% block content %}
+<h1>Історія заявок</h1>
+
+{% if applications %}
+<div class="table-scroll">
+<table class="history">
+    <thead>
+        <tr>
+            <th>№</th><th>Дата</th><th>Стать</th><th>У шлюбі</th><th>Утриманці</th>
+            <th>Освіта</th><th>Самозайнятий</th><th>Дохід заявника</th><th>Дохід співзаявника</th>
+            <th>Сума займу</th><th>Строк</th><th>Кредитна історія</th><th>Район</th>
+            <th>Рішення</th><th>Ймовірність</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in applications %}
+        <tr>
+            <td><a href="{% url 'loans:result' application.pk %}">{{ application.pk }}</a></td>
+            <td>{{ application.created_at|date:"d.m.Y H:i" }}</td>
+            <td>{{ application.get_gender_display }}</td>
+            <td>{{ application.get_married_display }}</td>
+            <td>{{ application.get_dependents_display }}</td>
+            <td>{{ application.get_education_display }}</td>
+            <td>{{ application.get_self_employed_display }}</td>
+            <td>{{ application.applicant_income }}</td>
+            <td>{{ application.coapplicant_income }}</td>
+            <td>{{ application.loan_amount }}</td>
+            <td>{{ application.get_loan_amount_term_display }}</td>
+            <td>{{ application.get_credit_history_display }}</td>
+            <td>{{ application.get_property_area_display }}</td>
+            <td class="{% if application.approved %}approved{% else %}rejected{% endif %}">
+                {% if application.approved %}схвалено{% else %}відмова{% endif %}
+            </td>
+            <td>{% widthratio application.probability 1 100 %}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<p>Заявок ще немає. <a href="{% url 'loans:form' %}">Подати першу</a></p>
+{% endif %}
+{% endblock %}

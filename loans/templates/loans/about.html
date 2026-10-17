@@ -1,0 +1,44 @@
+{% extends "loans/base.html" %}
+{% load static %}
+
+{% block title %}Про модель{% endblock %}
+
+{% block content %}
+<h1>Про модель</h1>
+<p>
+    Дані поділено на навчальну (80%) і тестову (20%) частини.
+    {{ metrics.test_size }} заявок тестової частини модель під час навчання не бачила,
+    на них і перевірено якість.
+</p>
+
+<h2>Якість на тестовій вибірці</h2>
+<table>
+    <tr><th>Точність (accuracy)</th><td>{% widthratio metrics.accuracy 1 100 %}%</td></tr>
+    <tr><th>F1 macro</th><td>{{ metrics.f1_macro }}</td></tr>
+    <tr><th>F1 macro моделі "завжди схвалити"</th><td>{{ metrics.baseline_f1_macro }}</td></tr>
+    <tr><th>Розпізнано схвалень</th><td>{% widthratio metrics.recall_approved 1 100 %}%</td></tr>
+    <tr><th>Розпізнано відмов</th><td>{% widthratio metrics.recall_rejected 1 100 %}%</td></tr>
+</table>
+
+<h2>Матриця помилок</h2>
+<img class="chart" src="{% static 'loans/charts/confusion_matrix.png' %}"
+     alt="Матриця помилок на тестовій вибірці">
+
+<h2>Вибір моделі і підбір параметрів</h2>
+<p>F1 macro на 5-кратній перехресній валідації:</p>
+<table>
+    {% for name, score in metrics.cv_by_model.items %}
+    <tr><th>{{ name }}, найкращі параметри</th><td>{{ score }}</td></tr>
+    {% endfor %}
+    <tr><th>RandomForest з параметрами за замовчуванням</th><td>{{ metrics.cv_default_forest }}</td></tr>
+</table>
+<p>Обрані параметри:
+    {% for name, value in metrics.best_params.items %}{{ name }} = {{ value }}{% if not forloop.last %}, {% endif %}{% endfor %}
+</p>
+
+{% if metrics.feature_importances %}
+<h2>Найважливіші ознаки</h2>
+<img class="chart" src="{% static 'loans/charts/feature_importance.png' %}"
+     alt="Важливість ознак у моделі RandomForest">
+{% endif %}
+{% endblock %}
