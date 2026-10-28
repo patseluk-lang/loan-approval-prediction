@@ -90,11 +90,26 @@ loans/                 застосунок: модель бази, форма, 
    git clone https://github.com/patseluk-lang/loan-approval-prediction.git
    cd loan-approval-prediction
    ```
-2. Створити й активувати віртуальне оточення (Windows):
+2. Створити й активувати віртуальне оточення.
+
+   Windows:
    ```
    python -m venv .venv
    .venv\Scripts\activate
    ```
+   macOS:
+   ```
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+   Linux:
+   ```
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+   В Ubuntu і Debian модуль `venv` встановлюється окремо: якщо перша команда
+   повідомить, що `ensurepip` недоступний, виконайте `sudo apt install python3-venv`.
+   Після активації команда `python` в оточенні працює однаково на всіх системах.
 3. Встановити залежності:
    ```
    pip install -r requirements.txt
